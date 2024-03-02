@@ -8,13 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>                
 </head>
-<body>
-    <header class="container mx-auto">
-        <div class="navbar bg-base-100">
+<body class="px-2">
+    <header class="container mx-auto mt-10">
+        <div class="navbar bg-base-100 flex flex-col lg:flex-row gap-4">
             <div class="flex-1">
-              <a class="btn btn-ghost mulish-font text-2xl font-black">ReTro</a>
+              <a class="btn btn-ghost mulish-font text-5xl font-black hover:bg-white">ReTro</a>
             </div>
-            <div class="flex-none space-x-6">
+            <div class="flex-none space-x-4 lg:space-x-6">
               <div class="dropdown dropdown-end space-x-2">
                 <div tabindex="0" role="button" class="btn btn-active btn-ghost btn-circle">
                   <div class="indicator space-x-2">
@@ -47,28 +47,41 @@
                 </div>
               </div>
               <div class="dropdown dropdown-end">
-                <button class="btn btn-primary">Sign In</button>
+                <button class="btn px-8 bg-[#797DFC] rounded-3xl text-white text-2xl">Sign In</button>
               </div>
             </div>
           </div>
     </header>
     <main>
                    <!-- banner section  -->
-    <section class="container mx-auto">
-        <div class="h-96 bg-[#12132D] bg-[url('images/bgbanner.png')] bg-no-repeat bg-cover object-cover rounded-xl flex justify-between p-20">
-            <div class="text-white space-y-4">
-                <h1 class="text-6xl font-black mulish-font">Welcome to the <br> <span class="text-[#797DFC]">ReTro</span> Forum</h1>
-                <p>Share your favorite opinion and win and wp <br> forum coffee mug!</p>
-                <div>
-                    <input type="text" name="" id="" class="pr-36 pl-4 py-4" placeholder="Search here anything">
-                    <button class="btn btn-primary bg-[#797DFC] rounded-3xl font-bold px-8 text-lg -ml-32">Search</button>
+    <section class="container mx-auto mt-6 lg:mt-14">
+        <div class=" bg-[#12132D] bg-[url('images/bgbanner.png')] bg-no-repeat bg-cover object-cover rounded-xl flex justify-between p-6 lg:p-32">
+                                  <!-- left side text  -->
+            <div class="space-y-3 lg:space-y-12 ">
+                <h1 class="text-white text-2xl lg:text-8xl font-black mulish-font">Welcome to the <br> <span class="text-[#797DFC]">ReTro</span> Forum</h1>
+                <p class="text-white lg:text-2xl mulish-font w-48 lg:w-full">Share your favorite opinion and win and wp <br> forum coffee mug!</p>
+                <div class="space-y-2">
+                    <input type="text" name="" id="" class="lg:pr-36 pl-4 py-4 rounded-3xl lg:w-[60%] lg:text-xl" placeholder="Search here anything">
+                    <button class="text-white btn btn-primary bg-[#797DFC] rounded-3xl font-bold px-8 lg:text-xl lg:-ml-36">Search</button>
                 </div>
             </div>
                 <!-- rigth side card  -->
-                <div>
-                    <div>
-                        <div>
+                <div class="flex items-center">
+                    <div class="bg-white px-6 lg:px-20 py-2 lg:py-16 rounded-2xl space-y-2 lg:space-y-4">
+                        <div class="flex justify-between space-x-8 lg:space-x-16 lg:text-3xl text-[#12132DCC] mulish-font font-semibold">
                             <h6>Register Users</h6>
+                            <p>01</p>
+                        </div>
+                        <div class="flex justify-between lg:space-x-16 lg:text-3xl text-[#12132DCC] mulish-font font-semibold">
+                            <h6>Forum</h6>
+                            <p>05</p>
+                        </div>
+                        <div class="flex justify-between lg:space-x-16 lg:text-3xl text-[#12132DCC] mulish-font font-semibold">
+                            <h6>Topics</h6>
+                            <p>01</p>
+                        </div>
+                        <div class="flex justify-between lg:space-x-16 lg:text-3xl text-[#12132DCC] mulish-font font-semibold">
+                            <h6>Replies</h6>
                             <p>01</p>
                         </div>
                     </div>
