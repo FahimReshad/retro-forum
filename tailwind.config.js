@@ -4,7 +4,8 @@ module.exports = {
     theme: {
       extend: {
         backgroundImage : {
-            'banner-section': "url('images/bgbanner.png')"
+            'banner-section': "url('images/bgbanner.png')",
+            'forum-section': "url('images/joinforum.png')",
         }
       },
     },

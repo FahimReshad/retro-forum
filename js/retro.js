@@ -7,14 +7,15 @@ const showRetroForum = async() => {
 }
 const displayAllPosts = (posts) =>{
     const showAllPosts = document.getElementById('show-all-post');
-    
+    let isActiveStatus = null;
     posts.forEach(post => {
+        
         const div = document.createElement('div');
         div.classList=`card bg-[#797DFC1A] p-10 col-span-2`;
         div.innerHTML= `
         <div class="flex gap-6">
           <div class="indicator">
-            <span class="indicator-item badge badge-success"></span> 
+            <span id="show-is-active" class="indicator-item "></span> 
             <div class="grid w-20 h-20 bg-base-300 place-items-center rounded-xl">
               <img src="${post.image}" alt="">
             </div>
@@ -51,23 +52,28 @@ const displayAllPosts = (posts) =>{
         `;
         showAllPosts.appendChild(div);
 
-
-       
+        if(`${post.isActive}`===true){
+            
+            document.getElementById('show-is-active').classList.add('bg-red-500')
+        }
+        
 
     });
     
+    
 }
-
+let count = 0;
 const showTitle = (postTitle, veiwCount) => {
+    
     const showTitleView = document.getElementById('show-title-view');
-    const div = document.createElement('div');
-    div.classList = `flex justify-between items-center my-2 shadow-xl bg-white p-4 rounded-xl w-full`
+    const div2 = document.createElement('div');
+    div2.classList = 'flex justify-between items-center my-2 shadow-xl bg-white p-4 rounded-xl w-full'
     
-    div.innerHTML =` 
+    div2.innerHTML =` 
+
     
 
 
-    
         <div class="text-[#12132D] font-bold text-xl">
           <h5>${postTitle}</h5>
         </div>
@@ -75,9 +81,11 @@ const showTitle = (postTitle, veiwCount) => {
           <img src="images/watch.svg" alt="">
           <p>${veiwCount}</p>
         </div>
-      
     `
-    showTitleView.appendChild(div);
+    showTitleView.appendChild(div2);
+    count++;
+    document.getElementById('click-count').innerText= count;
+    
 }
 
 
