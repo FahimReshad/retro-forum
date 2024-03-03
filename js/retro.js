@@ -7,7 +7,7 @@ const showRetroForum = async() => {
 }
 const displayAllPosts = (posts) =>{
     const showAllPosts = document.getElementById('show-all-post');
-    let isActiveStatus = null;
+    // let isActiveStatus = null;
     posts.forEach(post => {
         
         const div = document.createElement('div');
@@ -88,5 +88,42 @@ const showTitle = (postTitle, veiwCount) => {
     
 }
 
+const latestPosts = async() => {
+  const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
+  const data = await response.json()
+  const posts = data
+  console.log(posts)
+  posts.forEach(post=>{
+    console.log(post);
+
+
+    const latestPostSection = document.getElementById('latest-posts-section');
+  const div3 = document.createElement('div');
+  div3.innerHTML = `
+  <div class="card bg-base-100 shadow-xl p-4 border">
+          <figure><img class="rounded-lg" src="${post.cover_image}" alt="Shoes" /></figure>
+          <div class="card-body -ml-6">
+            <div class="flex gap-4 items-center">
+              <img src="images/publish.svg" alt="">
+              <p>${post.author.posted_date  || 'No publish data'}</p>
+            </div>
+            <h2 class="card-title">${post.title}</h2>
+            <p>${post.description}</p>
+            <div class="flex gap-4 items-center">
+              <img src="${post.profile_image}" alt="" class="rounded-full bg-slate-200 w-12 h-12 object-cover">
+              <div>
+                <h6>${post.author.name}</h6>
+                <p>${post.author.designation}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+  `
+  latestPostSection.appendChild(div3);
+  })
+  
+}
+
+latestPosts()
 
 showRetroForum()
