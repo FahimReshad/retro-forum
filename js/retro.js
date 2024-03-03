@@ -1,4 +1,4 @@
-const showRetroForum = async() => {
+const showRetroForum = async(searchText) => {
     const response = await fetch ('https://openapi.programming-hero.com/api/retro-forum/posts')
     const data = await response.json()
     const forum = data.posts
@@ -52,12 +52,13 @@ const displayAllPosts = (posts) =>{
         `;
         showAllPosts.appendChild(div);
 
-        if(`${post.isActive}`===true){
+        // if(`${post.isActive}`===true){
             
-            document.getElementById('show-is-active').classList.add('bg-red-500')
-        }
+        //     document.getElementById('show-is-active').classList.add('bg-red-500')
+        // }
         
-
+        searchShowForum()
+        
     });
     
     
@@ -67,13 +68,8 @@ const showTitle = (postTitle, veiwCount) => {
     
     const showTitleView = document.getElementById('show-title-view');
     const div2 = document.createElement('div');
-    div2.classList = 'flex justify-between items-center my-2 shadow-xl bg-white p-4 rounded-xl w-full'
-    
+    div2.classList = 'flex justify-between items-center my-2 shadow-xl bg-white p-4 rounded-xl w-full'   
     div2.innerHTML =` 
-
-    
-
-
         <div class="text-[#12132D] font-bold text-xl">
           <h5>${postTitle}</h5>
         </div>
@@ -86,15 +82,27 @@ const showTitle = (postTitle, veiwCount) => {
     count++;
     document.getElementById('click-count').innerText= count;
     
+    
+}
+
+const searchShowForum = () =>{
+const searchPosts = document.getElementById('search-posts');
+const searchText = searchPosts.value;
+console.log(search)
+if(search){
+  displayAllPosts('okayy')
+}
+
+
 }
 
 const latestPosts = async() => {
   const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
   const data = await response.json()
   const posts = data
-  console.log(posts)
+  // console.log(posts)
   posts.forEach(post=>{
-    console.log(post);
+    // console.log(post);
 
 
     const latestPostSection = document.getElementById('latest-posts-section');
@@ -113,7 +121,7 @@ const latestPosts = async() => {
               <img src="${post.profile_image}" alt="" class="rounded-full bg-slate-200 w-12 h-12 object-cover">
               <div>
                 <h6>${post.author.name}</h6>
-                <p>${post.author.designation}</p>
+                <p>${post.author.designation || 'Unknown'}</p>
               </div>
             </div>
           </div>
@@ -123,6 +131,7 @@ const latestPosts = async() => {
   })
   
 }
+
 
 latestPosts()
 
