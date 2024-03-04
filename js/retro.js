@@ -2,30 +2,24 @@ const showRetroForums = async() => {
     const response = await fetch ('https://openapi.programming-hero.com/api/retro-forum/posts')
     const data = await response.json()
     const forums = data.posts
-    //  console.log(data.posts[5])
-     displayAllPosts(forums);
+      displayAllPosts(forums);
 }
 const showSearchRetroForum = async(search) => {
     const response = await fetch (`https://openapi.programming-hero.com/api/retro-forum/posts?category=${search}`)
     const data = await response.json()
     const forum = data.posts
-    //  console.log(data.posts[5])
      displayAllPosts(forum);
 }
 const displayAllPosts = (posts) =>{
-  console.log(posts)
     const letsDiscuss= document.getElementById('lets-discuss');
     letsDiscuss.textContent = '';
-    // showAllPosts.textContent=''
-    let isActiveStatus = true;
-    posts.forEach(post => {
-        
+    posts.forEach(post => {       
         const div = document.createElement('div');
         div.classList=`card bg-[#797DFC1A] p-4 lg:p-10 `;
         div.innerHTML= `
         <div class="flex gap-6">
           <div class="indicator">
-            <span id="show-is-active" class="indicator-item badge badge-success"></span> 
+            <span id="show-is-active" class="indicator-item badge ${post.isActive ? 'bg-green-600' : 'bg-red-600'}"></span> 
             <div class="grid w-10 h-10 lg:w-20 lg:h-20 bg-base-300 place-items-center rounded-xl">
               <img src="${post.image}" alt="">
             </div>
@@ -61,41 +55,10 @@ const displayAllPosts = (posts) =>{
           </div>
         `;
         letsDiscuss.appendChild(div);
-
-        
-
-        console.log(post.isActive)
-        
-        
-        const active = document.querySelectorAll('.indicator-item');
-
-if (post.isActive === true) {
-    console.log('okay');
-    active.forEach(element => {
-        element.classList.remove('bg-red-500');
-        element.classList.add('badge', 'badge-secondary');
-    });
-} else {
-    console.log('not');
-    active.forEach(element => {
-        element.classList.remove('badge', 'badge-secondary');
-        element.classList.add('bg-red-500');
-    });
-}
-    });
-
-    
-
-    // hide loading spinner
-    loadingSpinner(false);
-    
-
-
-    
+    });   
 }
 let count = 0;
-const showTitle = (postTitle, veiwCount) => {
-    
+const showTitle = (postTitle, veiwCount) => {   
     const showTitleView = document.getElementById('show-title-view');
     const div2 = document.createElement('div');
     div2.classList = 'flex justify-between items-center my-2 shadow-xl bg-white p-6 rounded-xl w-full'   
@@ -110,23 +73,19 @@ const showTitle = (postTitle, veiwCount) => {
     `
     showTitleView.appendChild(div2);
     count++;
-    document.getElementById('click-count').innerText= count;
-    
-    
+    document.getElementById('click-count').innerText= count; 
 }
-
-
-
 const searchShowForum = () =>{
   loadingSpinner(true);
 const searchPosts = document.getElementById('search-posts');
 let searchText = searchPosts.value;
-showSearchRetroForum(searchText);
-
+// showSearchRetroForum(searchText);
+setTimeout(()=>{
+  showSearchRetroForum(searchText);
+  loadingSpinner(false);
+}, 2000)
 }
-
 const loadingSpinner = (isLoading) =>{
-
     const loadingSpnr = document.getElementById('loading-spinner');
     if (isLoading) {
       loadingSpnr.classList.remove('hidden');
@@ -134,17 +93,11 @@ const loadingSpinner = (isLoading) =>{
       loadingSpnr.classList.add('hidden');
     }
   };
-
-
 const latestPosts = async() => {
   const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
   const data = await response.json()
   const posts = data
-  // console.log(posts)
   posts.forEach(post=>{
-    // console.log(post);
-
-
     const latestPostSection = document.getElementById('latest-posts-section');
   const div3 = document.createElement('div');
   div3.innerHTML = `
@@ -169,10 +122,12 @@ const latestPosts = async() => {
   `
   latestPostSection.appendChild(div3);
   })
-  
 }
-
-
+window.onload = function (){
+  loadingSpinner(true)
+  setTimeout (function(){
+    loadingSpinner(false);
+    showRetroForums()
+  },2000)
+}
 latestPosts()
-
-showRetroForums()
