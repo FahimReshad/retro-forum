@@ -1,25 +1,31 @@
-const showRetroForums = async() => {
-    const response = await fetch ('https://openapi.programming-hero.com/api/retro-forum/posts')
-    const data = await response.json()
-    const forums = data.posts
-      displayAllPosts(forums);
-}
-const showSearchRetroForum = async(search) => {
-    const response = await fetch (`https://openapi.programming-hero.com/api/retro-forum/posts?category=${search}`)
-    const data = await response.json()
-    const forum = data.posts
-     displayAllPosts(forum);
-}
-const displayAllPosts = (posts) =>{
-    const letsDiscuss= document.getElementById('lets-discuss');
-    letsDiscuss.textContent = '';
-    posts.forEach(post => {       
-        const div = document.createElement('div');
-        div.classList=`card bg-[#797DFC1A] p-4 lg:p-10 `;
-        div.innerHTML= `
+const showRetroForums = async () => {
+  const response = await fetch(
+    "https://openapi.programming-hero.com/api/retro-forum/posts"
+  );
+  const data = await response.json();
+  const forums = data.posts;
+  displayAllPosts(forums);
+};
+const showSearchRetroForum = async (search) => {
+  const response = await fetch(
+    `https://openapi.programming-hero.com/api/retro-forum/posts?category=${search}`
+  );
+  const data = await response.json();
+  const forum = data.posts;
+  displayAllPosts(forum);
+};
+const displayAllPosts = (posts) => {
+  const letsDiscuss = document.getElementById("lets-discuss");
+  letsDiscuss.textContent = "";
+  posts.forEach((post) => {
+    const div = document.createElement("div");
+    div.classList = `card bg-[#797DFC1A] p-4 lg:p-10 `;
+    div.innerHTML = `
         <div class="flex gap-6">
           <div class="indicator">
-            <span id="show-is-active" class="indicator-item badge ${post.isActive ? 'bg-green-600' : 'bg-red-600'}"></span> 
+            <span id="show-is-active" class="indicator-item badge ${
+              post.isActive ? "bg-green-600" : "bg-red-600"
+            }"></span> 
             <div class="grid w-10 h-10 lg:w-20 lg:h-20 bg-base-300 place-items-center rounded-xl">
               <img src="${post.image}" alt="">
             </div>
@@ -32,7 +38,9 @@ const displayAllPosts = (posts) =>{
             <div class="text-[#12132D] font-bold text-xl">
               <h5>${post.title}</h5>
             </div>
-            <p class="text-[#12132D99] pb-4 border-b-2 border-dashed">${post.description}</p>
+            <p class="text-[#12132D99] pb-4 border-b-2 border-dashed">${
+              post.description
+            }</p>
             <div class="flex flex-col lg:flex-row justify-between items-center">
               <div class="flex items-center gap-2 lg:gap-6 lg:pt-3">
                 <div class="flex gap-1 lg:gap-3">
@@ -49,20 +57,23 @@ const displayAllPosts = (posts) =>{
                 </div>
               </div>
               <div class="btn btn-ghost rounded-full">
-              <button onclick="showTitle('${post.title.replace("'", " ")}', '${post.view_count}')"><img src="images/email-btn.svg" alt=""></button>
+              <button onclick="showTitle('${post.title.replace("'", " ")}', '${
+      post.view_count
+    }')"><img src="images/email-btn.svg" alt=""></button>
             </div>          
           </div>
           </div>
         `;
-        letsDiscuss.appendChild(div);
-    });   
-}
+    letsDiscuss.appendChild(div);
+  });
+};
 let count = 0;
-const showTitle = (postTitle, veiwCount) => {   
-    const showTitleView = document.getElementById('show-title-view');
-    const div2 = document.createElement('div');
-    div2.classList = 'flex justify-between items-center my-2 shadow-xl bg-white p-6 rounded-xl w-full'   
-    div2.innerHTML =` 
+const showTitle = (postTitle, veiwCount) => {
+  const showTitleView = document.getElementById("show-title-view");
+  const div2 = document.createElement("div");
+  div2.classList =
+    "flex justify-between items-center my-2 shadow-xl bg-white p-6 rounded-xl w-full";
+  div2.innerHTML = ` 
         <div class="text-[#12132D] font-bold text-xl">
           <h5>${postTitle}</h5>
         </div>
@@ -70,64 +81,69 @@ const showTitle = (postTitle, veiwCount) => {
           <img src="images/watch.svg" alt="">
           <p>${veiwCount}</p>
         </div>
-    `
-    showTitleView.appendChild(div2);
-    count++;
-    document.getElementById('click-count').innerText= count; 
-}
-const searchShowForum = () =>{
+    `;
+  showTitleView.appendChild(div2);
+  count++;
+  document.getElementById("click-count").innerText = count;
+};
+const searchShowForum = () => {
   loadingSpinner(true);
-const searchPosts = document.getElementById('search-posts');
-let searchText = searchPosts.value;
-// showSearchRetroForum(searchText);
-setTimeout(()=>{
-  showSearchRetroForum(searchText);
-  loadingSpinner(false);
-}, 2000)
-}
-const loadingSpinner = (isLoading) =>{
-    const loadingSpnr = document.getElementById('loading-spinner');
-    if (isLoading) {
-      loadingSpnr.classList.remove('hidden');
-    } else {
-      loadingSpnr.classList.add('hidden');
-    }
-  };
-const latestPosts = async() => {
-  const response = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts')
-  const data = await response.json()
-  const posts = data
-  posts.forEach(post=>{
-    const latestPostSection = document.getElementById('latest-posts-section');
-  const div3 = document.createElement('div');
-  div3.innerHTML = `
+  const searchPosts = document.getElementById("search-posts");
+  let searchText = searchPosts.value;
+  setTimeout(() => {
+    showSearchRetroForum(searchText);
+    loadingSpinner(false);
+  }, 2000);
+};
+const loadingSpinner = (isLoading) => {
+  const loadingSpnr = document.getElementById("loading-spinner");
+  if (isLoading) {
+    loadingSpnr.classList.remove("hidden");
+  } else {
+    loadingSpnr.classList.add("hidden");
+  }
+};
+const latestPosts = async () => {
+  const response = await fetch(
+    "https://openapi.programming-hero.com/api/retro-forum/latest-posts"
+  );
+  const data = await response.json();
+  const posts = data;
+  posts.forEach((post) => {
+    const latestPostSection = document.getElementById("latest-posts-section");
+    const div3 = document.createElement("div");
+    div3.innerHTML = `
   <div class="card bg-base-100 shadow-xl p-4 border">
-          <figure><img class="rounded-lg" src="${post.cover_image}" alt="Shoes" /></figure>
+          <figure><img class="rounded-lg" src="${
+            post.cover_image
+          }" alt="Shoes" /></figure>
           <div class="card-body -ml-6">
             <div class="flex gap-4 items-center">
               <img src="images/publish.svg" alt="">
-              <p>${post.author.posted_date  || 'No publish data'}</p>
+              <p>${post.author.posted_date || "No publish data"}</p>
             </div>
             <h2 class="card-title">${post.title}</h2>
             <p>${post.description}</p>
             <div class="flex gap-4 items-center">
-              <img src="${post.profile_image}" alt="" class="rounded-full bg-slate-200 w-12 h-12 object-cover">
+              <img src="${
+                post.profile_image
+              }" alt="" class="rounded-full bg-slate-200 w-12 h-12 object-cover">
               <div>
                 <h6>${post.author.name}</h6>
-                <p>${post.author.designation || 'Unknown'}</p>
+                <p>${post.author.designation || "Unknown"}</p>
               </div>
             </div>
           </div>
         </div>
-  `
-  latestPostSection.appendChild(div3);
-  })
-}
-window.onload = function (){
-  loadingSpinner(true)
-  setTimeout (function(){
+  `;
+    latestPostSection.appendChild(div3);
+  });
+};
+window.onload = function () {
+  loadingSpinner(true);
+  setTimeout(function () {
     loadingSpinner(false);
-    showRetroForums()
-  },2000)
-}
-latestPosts()
+    showRetroForums();
+  }, 2000);
+};
+latestPosts();
