@@ -123,7 +123,7 @@ const latestPosts = async () => {
               <p>${post.author.posted_date || "No publish data"}</p>
             </div>
             <h2 class="card-title">${post.title}</h2>
-            <p>${post.description}</p>
+            <p class="h-20">${post.description}</p>
             <div class="flex gap-4 items-center">
               <img src="${
                 post.profile_image
