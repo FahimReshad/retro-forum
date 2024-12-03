@@ -72,12 +72,12 @@ const showTitle = (postTitle, veiwCount) => {
   const showTitleView = document.getElementById("show-title-view");
   const div2 = document.createElement("div");
   div2.classList =
-    "flex justify-between items-center my-2 shadow-xl bg-white p-6 rounded-xl w-full";
+    "flex justify-around items-center my-2 shadow-xl bg-white py-3 pr-8 pl-1 rounded-xl w-full";
   div2.innerHTML = ` 
         <div class="text-[#12132D] font-bold text-xl">
           <h5>${postTitle}</h5>
         </div>
-        <div class="flex gap-3">
+        <div class="flex gap-1">
           <img src="images/watch.svg" alt="">
           <p>${veiwCount}</p>
         </div>
